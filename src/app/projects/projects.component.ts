@@ -27,10 +27,10 @@ export class ProjectsComponent {
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     selection = new SelectionModel<PeriodicElement>(true, []);
 
-    constructor() {
-        
+    constructor() {    
         Settings.initialize();
         TheDb.createDb(Settings.dbPath);
+
         // TheDb.openDb(Settings.dbPath)
         // .then(() => {
 

@@ -2,6 +2,7 @@
 
 const {app, BrowserWindow } = require('electron');
 const path = require('path');
+var log = require('electron-log');
 
 const devMode = /electron/.test(path.basename(app.getPath('exe'), '.exe'));
 
@@ -41,7 +42,8 @@ let createWindow = () => {
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
 		mainWindow = null;
-	});
+    });
+    log.transports.file.level = 'info'
 }
 
 app.on('ready', createWindow);
