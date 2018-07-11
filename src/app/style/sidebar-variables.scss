@@ -1,0 +1,25 @@
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	src: url('/assets/fonts/Roboto-Regular.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/assets/fonts/Roboto-Thin.ttf') format('ttf');
+    font-weight: 100;
+}
+
+$sidebar-font-size: 12px;
+$sidebar-color: #fff;
+$sidebar-border-left: 4px;
+$sidebar-margin: 0px;
+$sidebar-padding-left: 20px;
+$sidebar-header-height: 36px;
+$sidebar-block-height: 40px;
+$sidebar-cursor: pointer;
+$sidebar-border-left-color: #198e7f;
+// $sidebar-background-color-hover: #162e41;
+// $sidebar-background-color-focused:#132838;
+$sidebar-background-color-hover: #132838;
+$sidebar-background-color-focused:#162e41;
