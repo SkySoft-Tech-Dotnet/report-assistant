@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, OneToMany, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, OneToMany, Column } from "typeorm";
 import { Report } from './report.model';
 
 @Entity()

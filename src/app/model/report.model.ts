@@ -13,6 +13,9 @@ export class Report {
     @Column()
     Duration  : number;
 
+    @Column()
+    Created : Date;
+
     @ManyToOne(() => Project, project => project.Reports)
     Project : Project;
 }
