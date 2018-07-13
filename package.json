@@ -30,6 +30,7 @@
     "ngx-electron": "^1.0.4",
     "rxjs": "^6.2.1",
     "sqlite3": "^4.0.0",
+    "typeorm": "^0.2.7",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

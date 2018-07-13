@@ -1,8 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
-import { Settings } from './repository/settings';
-import { TheDb } from './repository/thedb';
 
 export interface PeriodicElement {
     abbreviation: string;
@@ -27,9 +25,9 @@ export class ProjectsComponent {
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     selection = new SelectionModel<PeriodicElement>(true, []);
 
-    constructor() {    
-        Settings.initialize();
-        TheDb.createDb(Settings.dbPath);
+    constructor() {
+        // Settings.initialize();
+        // TheDb.createDb(Settings.dbPath);
 
         // TheDb.openDb(Settings.dbPath)
         // .then(() => {
