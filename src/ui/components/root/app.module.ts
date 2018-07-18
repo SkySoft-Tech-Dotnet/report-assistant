@@ -1,22 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { AppComponent } from './app.component';
-import { routing }  from './app-routing.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxElectronModule } from 'ngx-electron';
-import { NavigationComponent } from './component/navigation/navigation.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { ReportsComponent } from './component/reports/reports.component';
-import { ProjectsComponent } from './component/projects/projects.component';
-import { GlobalErrorHandler } from './infrastructure/global-error-handler.infrastructure';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material';
 
+import { NavigationComponent } from '../navigation/navigation.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { ReportsComponent } from '../reports/reports.component';
+import { ProjectsComponent } from '../projects/projects.component';
+import { GlobalErrorHandler } from '../../infrastructure/global-error-handler.infrastructure';
+import { AppComponent } from './app.component';
+import { routing }  from './app-routing.module';
 
 @NgModule({
     imports: [

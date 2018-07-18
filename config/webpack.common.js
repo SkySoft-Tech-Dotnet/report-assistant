@@ -5,9 +5,9 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        'polyfills': './src/polyfills.ts',
-        'vendor': './src/vendor.ts',
-        'app': './src/main.ts'
+        'polyfills': './src/ui/infrastructure/polyfills.ts',
+        'vendor': './src/ui/infrastructure/vendor.ts',
+        'app': './src/ui/main.ts'
     },
 
     resolve: {
@@ -66,15 +66,15 @@ module.exports = {
     },
 
     plugins: [
-        new HtmlWebpackPlugin({template: 'src/index.html'}),
+        new HtmlWebpackPlugin({template: 'src/ui/index.html'}),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(@angular|esm5)/,
-            path.resolve(__dirname, '../src')
+            path.resolve(__dirname, '../../src')
         ),
         new CopyWebpackPlugin(
         [
             {
-                from: 'src/assets',
+                from: 'src/ui/assets',
                 to: 'assets',
             }
         ])

@@ -14,5 +14,7 @@ import { DashboardComponent } from './dashboard.component';
     ],
     bootstrap: []
 })
+export class DashboardModule { 
+    
 
-export class DashboardModule { }
+}

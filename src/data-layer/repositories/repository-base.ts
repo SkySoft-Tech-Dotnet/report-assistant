@@ -1,7 +1,7 @@
-import { Connection, ConnectionOptions, createConnection} from "../../../node_modules/typeorm";
+import { Connection, ConnectionOptions, createConnection} from "typeorm";
 import { Settings } from './settings';
-import { Report } from '../model/report.model';
-import { Project } from '../model/project.model';
+import { Report } from '../entities/report.entity';
+import { Project } from '../entities/project.entity';
 
 
 export class RepositoryBase<TEntity>{
