@@ -1,13 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NavigationComponent } from './navigation.component';
+import { SideMenuComponent } from './side-menu.component';
 
 @NgModule({
     imports: [
         BrowserModule,       
     ],
     declarations: [
-        NavigationComponent
+        SideMenuComponent
     ],
     providers: [
 

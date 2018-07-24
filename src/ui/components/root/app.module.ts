@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material';
 
-import { NavigationComponent } from '../navigation/navigation.component';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ReportsComponent } from '../reports/reports.component';
 import { ProjectsComponent } from '../projects/projects.component';
@@ -34,7 +34,7 @@ import { routing }  from './app-routing.module';
 
     declarations: [
         AppComponent,
-        NavigationComponent,
+        SideMenuComponent,
         DashboardComponent,
         ReportsComponent,
         ProjectsComponent,
