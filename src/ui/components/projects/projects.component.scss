@@ -1,14 +1,14 @@
 table {
     width: 100%;
-}  
-  
+}
+
 .mat-ripple-element {
     background: rgba(186, 223, 255, 0.4) !important;
 }
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background:#198e7f !important;
+    background: #198e7f !important;
 }
 
 .mat-button:hover {
@@ -19,29 +19,28 @@ table {
     height: 60px;
     background-color: rgb(190, 190, 190);
 }
+
 .actions-menu {
     padding: 0 !important;
     box-shadow: none !important;
     background-color: rgb(245, 245, 245);
 }
+
 .actions-menu-button {
     display: flex;
     height: inherit;
     width: 50px;
     height: 70px;
-    
     .mat-button {
         margin: 0;
         padding: 0;
         min-width: 50px;
     }
-
     .content-button {
         margin-top: 5px;
         margin-bottom: 5px;
         height: 60px;
     }
-
     .icon-button {
         min-width: 50px;
         height: 40px;
@@ -52,7 +51,6 @@ table {
         margin: auto;
         font-size: 40px;
     }
-
     .color-button-create-record {
         color: #76a797;
     }
@@ -62,11 +60,10 @@ table {
     .color-button-delete-something {
         color: #d65532;
     }
-    
     .text-button {
         width: 50px;
         height: 20px;
-        font-family: Roboto;
+        //font-family: "Roboto";
         font-weight: 300;
         font-size: 9px;
         display: flex;
