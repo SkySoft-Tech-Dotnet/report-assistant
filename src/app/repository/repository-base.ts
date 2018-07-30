@@ -4,7 +4,7 @@ import { Report } from '../model/report.model';
 import { Project } from '../model/project.model';
 
 
-export class RepositoryBase<TEntity>{
+export class RepositoryBase<TEntity> {
 
     //private currentType: Function = function(){};
     private connection: Promise<Connection>;

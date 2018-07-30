@@ -3,7 +3,6 @@ import { RepositoryBase } from './repository/repository-base';
 import { Project } from './model/project.model';
 import { Report } from './model/report.model';
 
-
 @Component({
   selector: 'app-root',
   encapsulation:ViewEncapsulation.None,
