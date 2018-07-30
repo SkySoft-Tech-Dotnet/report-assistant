@@ -1,18 +1,20 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NavigationComponent } from './navigation.component';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
     imports: [
-        BrowserModule,       
+        BrowserModule,
     ],
     declarations: [
-        NavigationComponent
+        DashboardComponent
     ],
     providers: [
 
     ],
     bootstrap: []
 })
+export class DashboardModule { 
+    
 
-export class NavigationModule { }
+}

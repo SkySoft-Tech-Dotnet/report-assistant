@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RepositoryBase } from './repository/repository-base';
-import { Project } from './model/project.model';
-import { Report } from './model/report.model';
+
+import { RepositoryBase } from '../../../data-layer/repositories/repository-base';
+import { Project } from '../../../data-layer/entities/project.entity';
+import { Report } from '../../../data-layer/entities/report.entity';
 
 @Component({
   selector: 'app-root',

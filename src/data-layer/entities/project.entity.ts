@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, OneToMany, Column } from "typeorm";
-import { Report } from './report.model';
+import { Report } from './report.entity';
 
 @Entity()
 export class Project {

@@ -1,13 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DashboardComponent } from './dashboard.component';
+import { SideMenuComponent } from './side-menu.component';
 
 @NgModule({
     imports: [
-        BrowserModule,
+        BrowserModule,       
     ],
     declarations: [
-        DashboardComponent
+        SideMenuComponent
     ],
     providers: [
 
@@ -15,4 +15,4 @@ import { DashboardComponent } from './dashboard.component';
     bootstrap: []
 })
 
-export class DashboardModule { }
+export class NavigationModule { }
