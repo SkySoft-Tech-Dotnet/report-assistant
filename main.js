@@ -3,8 +3,7 @@ const path = require("path");
 const url = require("url");
 
 let tray = null;
-let win;
-let isForceClose = false;
+let win  = null;
 
 function appStart() {
     createWindow();
@@ -17,9 +16,7 @@ function createTray(){
     tray.setToolTip('Report Organizer');
     updateTrayMenu();
 
-    tray.on('click', () => {
-        win.show();
-    });
+    tray.on('click', showWindow);
 }
 
 function updateTrayMenu() {
@@ -35,8 +32,7 @@ function updateTrayMenu() {
             {
                 label: 'Close',
                 click: () => {
-                    isForceClose = true;
-                    win.close();
+                    app.quit();
                 }
             }
         ]);
@@ -63,13 +59,9 @@ function createWindow() {
         // The following is optional and will open the DevTools:
         // win.webContents.openDevTools()
 
-        // hide window instead of close
-        win.on('close', (e) => {
-
-            if(!isForceClose){
-                e.preventDefault();
-                win.hide();
-            }
+        win.on('closed', () => {
+            win = null;
+            updateTrayMenu();
         });
 
         updateTrayMenu();
@@ -82,21 +74,22 @@ function toggleDevTools(){
 
 function showWindow(){
 
+    if(!win){
+        createWindow();
+    }
+
     if(!win.isVisible()){
         win && win.show();
     } else {
         win && win.hide();
     }
+
 }
 
 app.on("ready", appStart);
 
-// on macOS, closing the window doesn't quit the app
-app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
-});
+// callback should be empty if we need to leave main process alive after all window close
+app.on("window-all-closed", () => {});
 
 // initialize the app's main window
 app.on("activate", () => {
