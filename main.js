@@ -5,7 +5,7 @@ const url = require("url");
 let win;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({ height: 720, width: 1280, title: 'Report Organizer' });
 
     // load the dist folder from Angular
     win.loadURL(
@@ -15,6 +15,8 @@ function createWindow() {
             slashes: true
         })
     );
+
+    win.maximize();
 
     win.webContents.openDevTools();
 
