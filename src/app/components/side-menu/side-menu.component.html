@@ -1,0 +1,52 @@
+<div class="account">
+  <div class="block-20"></div>
+
+  <div class="user-information">
+    <img class="photo" src="assets/images/Rick.png">
+    <div class="user-name">
+      <p>User Name</p>
+    </div>
+  </div>
+
+  <div class="account-navigation">
+    <span class="caption">MY ACCOUNT
+      <i class="material-icons">keyboard_arrow_down</i>
+    </span>
+  </div>
+
+  <div class="block-20"></div>
+</div>
+
+
+<div class="block-20">
+  <p class="caption">MAIN</p>
+</div>
+
+
+<div class="sidebar">
+  <ul *ngFor="let menuItem of mainMenuItems">
+    <li [routerLink]="menuItem.routerLink">
+      <a class="sidebar-item" (click)="onClick(menuItem)" [ngClass]="menuItem.isActive ? 'sidebar-item-focused' : ''">
+        <i class="material-icons">{{menuItem.icon}}</i>
+        <span>{{menuItem.title}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="block-10"></div>
+<div class="block-20">
+  <p class="caption">SETTINGS</p>
+</div>
+
+
+<div class="sidebar">
+  <ul *ngFor="let menuItem of settingsMenuItems">
+    <li [routerLink]="menuItem.routerLink">
+      <a class="sidebar-item" (click)="onClick(menuItem)" [ngClass]="menuItem.isActive ? 'sidebar-item-focused' : ''">
+        <i class="material-icons">{{menuItem.icon}}</i>
+        <span>{{menuItem.title}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
