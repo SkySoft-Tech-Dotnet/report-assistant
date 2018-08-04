@@ -9,7 +9,7 @@ import { SideMenuItem } from '../side-menu';
 export class SideMenuItemComponent implements OnInit {
 
   @Input() menuItem: SideMenuItem;
-  @Output() onSelect = new EventEmitter<SideMenuItem>();
+  @Output() onitemSelect = new EventEmitter<SideMenuItem>();
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class SideMenuItemComponent implements OnInit {
   }
 
   selectMenuItem(): void {
-    this.onSelect.emit(this.menuItem);
+    this.onitemSelect.emit(this.menuItem);
   }
 
 }

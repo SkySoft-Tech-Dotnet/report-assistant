@@ -1,5 +1,5 @@
 export class SideMenuItem {
-    public isActive: boolean = false;
+    public isActive = false;
     constructor(
         public title: string,
         public routerLink: string,
