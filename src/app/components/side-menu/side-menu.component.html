@@ -24,14 +24,7 @@
 
 
 <div class="sidebar">
-  <ul *ngFor="let menuItem of mainMenuItems">
-    <li [routerLink]="menuItem.routerLink">
-      <a class="sidebar-item" (click)="onClick(menuItem)" [ngClass]="menuItem.isActive ? 'sidebar-item-focused' : ''">
-        <i class="material-icons">{{menuItem.icon}}</i>
-        <span>{{menuItem.title}}</span>
-      </a>
-    </li>
-  </ul>
+  <rp-side-menu-item *ngFor="let menuItem of mainMenuItems" [menuItem]="menuItem" (onSelect)="onClick($event)"></rp-side-menu-item>
 </div>
 
 <div class="block-10"></div>
@@ -41,12 +34,5 @@
 
 
 <div class="sidebar">
-  <ul *ngFor="let menuItem of settingsMenuItems">
-    <li [routerLink]="menuItem.routerLink">
-      <a class="sidebar-item" (click)="onClick(menuItem)" [ngClass]="menuItem.isActive ? 'sidebar-item-focused' : ''">
-        <i class="material-icons">{{menuItem.icon}}</i>
-        <span>{{menuItem.title}}</span>
-      </a>
-    </li>
-  </ul>
+  <rp-side-menu-item *ngFor="let menuItem of settingsMenuItems" [menuItem]="menuItem" (onSelect)="onClick($event)"></rp-side-menu-item>
 </div>

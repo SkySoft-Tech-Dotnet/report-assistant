@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SideMenuItem } from './side-menu';
 
 @Component({
   selector: 'rp-side-menu',
@@ -35,12 +36,4 @@ export class SideMenuComponent implements OnInit {
     item.isActive = true;
   }
 
-}
-
-class SideMenuItem {
-  public isActive: boolean = false;
-  constructor(
-    public title: string,
-    public routerLink: string,
-    public icon: string) { }
 }
