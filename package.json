@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "electron": "ng build --base-href ./ && electron .",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build --base-href ./ && electron .",
+    "start:angular": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
