@@ -35,8 +35,7 @@ const electronConfig = ` target: "electron-renderer",
                             typeorm: path.resolve(__dirname, "../node_modules/typeorm/typeorm-model-shim")
                         }
                     },`;
-
-const webConfig = ` target: "web",
+const webConfig = ` target: "electron-renderer",
                     externals: {
                         electron: "require('electron')",
                         buffer: "require('buffer')",
@@ -77,7 +76,7 @@ fs.readFile(f_angular, 'utf8', function (err, data) {
   var result = data.replace(new RegExp(electronConfig, "g"), '');
   var result = data.replace(new RegExp(webConfig, "g"), '');
   var result = result.replace(/target: "web",/g, '');
-  var result = result.replace(/return \{/g, 'return {' + electronConfig);
+  var result = result.replace(/return \{/g, 'return {' + webConfig);
 
   fs.writeFile(f_angular, result, 'utf8', function (err) {
     if (err) return console.log(err);
