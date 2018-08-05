@@ -1,7 +1,7 @@
 // This script change webpack-configs for "ng serve"
 const fs = require('fs');
 const f_angular = 'node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js';
-const {electronConfig, webConfig}  = require('postinstall.config');
+const {electronConfig, webConfig}  = require('./postinstall.config');
 
 fs.readFile(f_angular, 'utf8', function (err, data) {
   if (err) {
