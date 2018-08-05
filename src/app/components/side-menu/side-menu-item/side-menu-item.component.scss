@@ -1,0 +1,27 @@
+@import '../../../scss/index';
+.sidebar-item {
+    display: flex;
+    cursor: pointer;
+    color: get-color(color1);
+    align-items: center;
+    line-height: 36px;
+    border-left: 4px solid transparent;
+    padding-left: 16px;
+    >i {
+        font-size: 16px;
+        display: inline-block;
+        text-align: left;
+    }
+    >span {
+        padding-left: 20px; //font-family: "Roboto";
+        font-size: 12px;
+    }
+    &:hover {
+        background-color: get-color(color5);
+    }
+    &.focused {
+        background-color: get-color(color7);
+        border-left: 4px solid get-color(color6);
+        position: relative;
+    }
+}
