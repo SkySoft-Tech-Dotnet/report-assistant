@@ -16,7 +16,12 @@ function appStart():void {
 
 function createTray(){
     // tray
-    tray = new Tray(path.join(__dirname, `/dist/favicon.ico`));
+    if(serve){
+        tray = new Tray(path.join(__dirname, `/src/favicon.ico`));
+    } else {
+        tray = new Tray(path.join(__dirname, `/dist/favicon.ico`));
+    }
+
     tray.setToolTip('Report Organizer');
     updateTrayMenu();
 
