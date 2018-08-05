@@ -65,9 +65,12 @@ typings/
 .vscode/tasks.json
 .vscode/launch.json
 .vscode/extensions.json
+.idea/*
 
 # compiled output
 /dist
 /tmp
 /out-tsc
+/app-builds
+/main.js
 .editorconfig
