@@ -5,6 +5,10 @@ const url = require("url");
 let tray = null;
 let win  = null;
 
+// detect serve mode
+const args = process.argv.slice(1);
+let serve = args.some(val => val === '--serve');
+
 function appStart() {
     createWindow();
     createTray();
@@ -41,20 +45,28 @@ function updateTrayMenu() {
 }
 
 function createWindow() {
-
-    if(!win){
+        if(!win){
 
         // set show - true if you need to open window after app start.
         win = new BrowserWindow({ width: 800, height: 600, show:false });
 
-        // load the dist folder from Angular
-        win.loadURL(
-            url.format({
-                pathname: path.join(__dirname, `/dist/index.html`),
-                protocol: "file:",
-                slashes: true
-            })
-        );
+
+        if (serve) {
+            // get dynamic version from localhost:4200
+            require('electron-reload')(__dirname, {
+                electron: require(`${__dirname}/node_modules/electron`)});
+            win.loadURL('http://localhost:4200');
+        } else {
+            // load the dist folder from Angular
+            win.loadURL(
+                url.format({
+                    pathname: path.join(__dirname, `/dist/index.html`),
+                    protocol: "file:",
+                    slashes: true
+                })
+            );
+        }
+
 
         // The following is optional and will open the DevTools:
         // win.webContents.openDevTools()
