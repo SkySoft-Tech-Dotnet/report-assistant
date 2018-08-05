@@ -1,0 +1,9 @@
+@import 'scss/index';
+.container {
+    width: inherit;
+    height: 100vh;
+    >.sidenav {
+        background: linear-gradient(69deg, get-color(color3), get-color(color4));
+        width: 180px;
+    }
+}
