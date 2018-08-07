@@ -9,7 +9,7 @@ import { SideMenuItem } from './side-menu';
 export class SideMenuComponent implements OnInit {
 
   mainMenuItems: SideMenuItem[] = [
-    new SideMenuItem('Dashboard', 'dashboard', 'dashboard'),
+    new SideMenuItem('Dashboard', 'dashboard', 'dashboard', true),
     new SideMenuItem('Reports', 'reports', 'report'),
     new SideMenuItem('Todo List', 'todo_list', 'list'),
     new SideMenuItem('Notes', 'notes', 'notes'),

@@ -44,7 +44,7 @@
               "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": false
             },
             "production": {
               "optimization": true,
