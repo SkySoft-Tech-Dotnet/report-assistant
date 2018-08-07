@@ -24,7 +24,7 @@ const commonConfig = `externals: {
                         typeorm: "require('typeorm')",
                         sqlite3: "require('sqlite3')",
                         commonjs: "require('commonjs')",
-                        spectron: "require('spectron)"
+                        spectron: "require('spectron')"
                     },
                     resolve: { // see: http://webpack.github.io/docs/configuration.html#resolve
                         alias: {
