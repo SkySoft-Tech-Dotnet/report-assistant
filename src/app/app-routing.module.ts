@@ -15,6 +15,14 @@ const routes: Routes = [
     loadChildren: './pages/todo-list/todo-list.module#TodoListModule'
   },
   {
+    path: 'notes',
+    loadChildren: './pages/notes/notes.module#NotesModule'
+  },
+  {
+    path: 'meetings',
+    loadChildren: './pages/meetings/meetings.module#MeetingsModule'
+  },
+  {
     path: '**',
     redirectTo: 'dashboard'
   }
