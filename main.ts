@@ -17,9 +17,9 @@ function appStart():void {
 function createTray(){
     // tray
     if(serve){
-        tray = new Tray(path.join(__dirname, `/src/favicon.ico`));
+        tray = new Tray(path.join(__dirname, `/src/assets/icons/tray/clock.ico`));
     } else {
-        tray = new Tray(path.join(__dirname, `/dist/favicon.ico`));
+        tray = new Tray(path.join(__dirname, `/dist/assets/icons/tray/clock.ico`));
     }
 
     tray.setToolTip('Report Organizer');
