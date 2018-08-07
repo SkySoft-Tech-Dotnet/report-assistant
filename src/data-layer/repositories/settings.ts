@@ -3,12 +3,12 @@ import { remote } from 'electron';
 
 export class Settings {
 
-    //TODO: different configs for dev and prod
+    // TODO: different configs for dev and prod
 
     public static dbFolder: string;
     public static dbPath: string;
     public static appPath: string;
-    private static dataSubFolder = 'dist/assets/data'; //dev
+    private static dataSubFolder = 'dist/assets/data'; // dev
     // private static dataSubFolder = '/'; //prod
     private static dbName = 'database.db';
 
@@ -17,15 +17,15 @@ export class Settings {
     }
 
     private static getPaths() {
-        //dev
+        // dev
         // return folder where app is running
         // Settings.appPath = remote.app.getAppPath();
 
-        //prod
+        // prod
         // return user data folder
         Settings.appPath = remote.app.getPath('userData');
 
         Settings.dbFolder = path.join(Settings.appPath, Settings.dataSubFolder);
-        Settings.dbPath = path.join(Settings.dbFolder, this.dbName)
+        Settings.dbPath = path.join(Settings.dbFolder, this.dbName);
     }
 }
