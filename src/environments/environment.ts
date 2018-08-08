@@ -6,7 +6,7 @@ import * as path from 'path';
 
 export const environment = {
     production: false,
-    trayIconPath: path.join(__dirname, '../../../src/favicon.ico'),
+    trayIconPath: path.join(__dirname, '../../../src/assets/icons/tray/clock.ico'),
 };
 
 /*
