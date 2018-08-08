@@ -1,12 +1,12 @@
 {
   "name": "app-ui",
   "version": "0.0.0",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "npm run postinstall:electron && npm run electron:tsc && ng build",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
-    "electron:tsc": "tsc main.ts",
+    "electron:tsc": "tsc main.ts --module commonjs --moduleResolution node --target es5 --outDir ./dist",
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:tsc && electron ./ --serve",
     "electron:local": "npm run build:prod && electron .",
     "electron:linux": "npm run build:prod && npx electron-builder build --linux",
