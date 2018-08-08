@@ -1,4 +1,4 @@
-<div [routerLink]="menuItem.routerLink">
+<div style="outline: none;" [routerLink]="menuItem.routerLink">
   <a class="sidebar-item" (click)="selectMenuItem()" [ngClass]="menuItem.isActive ? 'focused' : ''">
     <i class="material-icons">{{menuItem.icon}}</i>
     <span>{{menuItem.title}}</span>

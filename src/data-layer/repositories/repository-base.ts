@@ -1,4 +1,4 @@
-import { Connection, ConnectionOptions, createConnection } from "typeorm";
+import { Connection, ConnectionOptions, createConnection } from 'typeorm';
 import { Settings } from './settings';
 import { Report } from '../entities/report.entity';
 import { Project } from '../entities/project.entity';
@@ -6,31 +6,40 @@ import { Project } from '../entities/project.entity';
 
 export class RepositoryBase<TEntity> {
 
-    //private currentType: Function = function(){};
     private connection: Promise<Connection>;
     private options: ConnectionOptions;
 
     constructor() {
         console.log('test');
-
         Settings.initialize();
         this.options = {
-            type: "sqlite",
+            type: 'sqlite',
             database: Settings.dbPath,
             entities: [Project, Report],
             synchronize: true,
             logging: false,
         };
         this.connection = createConnection(this.options);
+
+        this.connection.then(conn => {
+            console.log(conn);
+        });
+
     }
 
     public add(entity: TEntity, type: string) {
-        this.connection.then(async connection => {
+        this.connection
+            .then(async connection => {
 
-            let repository = connection.getRepository(type);
-            await repository.save(entity);
+                const repository = connection.getRepository(type);
+                console.log(repository);
+                return repository.save(entity);
 
-        }).catch(error => console.log(error));
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.log(error));
     }
 
     // public delete(id: number){
