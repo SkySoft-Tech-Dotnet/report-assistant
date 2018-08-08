@@ -14,7 +14,7 @@ export function initMainWindow (isServe: boolean, isDevtoolsOpen: boolean) {
         //     electron: require (`${__dirname}/node_modules/electron`)
         // });
         require ('electron-reload') (__dirname, {
-            electron: require (`electron`)
+            electron: require (path.join (__dirname, '../../../../node_modules/electron'))
         });
         window.loadURL ('http://localhost:4200');
     } else {
@@ -31,7 +31,7 @@ export function initMainWindow (isServe: boolean, isDevtoolsOpen: boolean) {
     }
 
     if (isDevtoolsOpen) {
-        window.webContents.openDevTools();
+        window.webContents.openDevTools ();
     }
 
     return window;
