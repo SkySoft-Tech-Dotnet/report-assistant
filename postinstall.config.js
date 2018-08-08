@@ -1,36 +1,25 @@
-const commonConfig = `externals: {
-                        electron: "require('electron')",
-                        buffer: "require('buffer')",
-                        child_process: "require('child_process')",
-                        crypto: "require('crypto')",
-                        events: "require('events')",
-                        fs: "require('fs')",
-                        http: "require('http')",
-                        https: "require('https')",
-                        assert: "require('assert')",
-                        dns: "require('dns')",
-                        net: "require('net')",
-                        os: "require('os')",
-                        path: "require('path')",
-                        querystring: "require('querystring')",
-                        readline: "require('readline')",
-                        repl: "require('repl')",
-                        stream: "require('stream')",
-                        string_decoder: "require('string_decoder')",
-                        url: "require('url')",
-                        util: "require('util')",
-                        zlib: "require('zlib')",
-                        ffi: "require('ffi')",
-                        typeorm: "require('typeorm')",
-                        sqlite3: "require('sqlite3')",
-                        commonjs: "require('commonjs')",
-                        spectron: "require('spectron')"
-                    },
-                    resolve: { // see: http://webpack.github.io/docs/configuration.html#resolve
-                        alias: {
-                            typeorm: path.resolve(__dirname, "../node_modules/typeorm/typeorm-model-shim")
-                        }
-                    },`;
+const fs = require('fs');
+const f_angular = 'extra-webpack.config.js';
+const regex = /\/\/ start of extra configs([\S\s]+)\/\/ end of extra configs/;
 
-module.exports.electronConfig = 'target: "electron-renderer", ' + commonConfig;
-module.exports.webConfig = 'target: "web", ' + commonConfig;
+module.exports.getConfigs = function(){
+    return new Promise((resolve, reject) => {
+
+        fs.readFile(f_angular, 'utf8', function (err, data) {
+            if (err) {
+                console.log(err);
+                reject(err);
+            }
+
+            var extra = data.match(regex)[1];
+
+            const electronConfig = 'target: "electron-renderer", ' + extra + ',';
+            const webConfig = 'target: "web", ' + extra + ',';
+
+            resolve({
+                electronConfig,
+                webConfig
+            })
+        });
+    });
+};

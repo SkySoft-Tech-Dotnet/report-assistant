@@ -1,3 +1,6 @@
+import * as path from 'path';
+
 export const environment = {
-  production: true
+    production: true,
+    trayIconPath: path.join(__dirname, '../favicon.ico'),
 };
