@@ -13,6 +13,6 @@ export class App {
             App.windows.main = null;
         });
 
-        App.tray = initTray(App.windows);
+        App.tray = initTray(App.windows, isServe, isDevtoolsOpen);
     }
 }
