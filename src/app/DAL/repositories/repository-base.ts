@@ -12,7 +12,7 @@ export class RepositoryBase<TEntity> {
 
     constructor() {
         console.log('test');
-        
+
         Settings.initialize();
         this.options = {
             type: "sqlite",
