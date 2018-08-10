@@ -10,7 +10,6 @@ export class RepositoryBase<TEntity> {
     private options: ConnectionOptions;
 
     constructor() {
-        console.log('test');
         Settings.initialize();
         this.options = {
             type: 'sqlite',
@@ -32,7 +31,6 @@ export class RepositoryBase<TEntity> {
             .then(async connection => {
 
                 const repository = connection.getRepository(type);
-                console.log(repository);
                 return repository.save(entity);
 
             })

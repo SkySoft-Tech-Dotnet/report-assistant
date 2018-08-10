@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: './pages/meetings/meetings.module#MeetingsModule'
   },
   {
+    path: 'projects',
+    loadChildren: './pages/projects/projects.module#ProjectsModule'
+  },
+  {
     path: '**',
     redirectTo: 'dashboard'
   }

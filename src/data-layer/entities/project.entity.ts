@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, OneToMany, Column } from 'typeorm';
-import { Report } from './report.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Project {
@@ -15,7 +14,4 @@ export class Project {
 
     @Column()
     IsActive: boolean;
-
-    // @OneToMany(() => Report, report => report.Project)
-    // Reports: Report[];
 }
