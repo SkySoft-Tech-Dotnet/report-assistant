@@ -1,8 +1,8 @@
 import * as url from 'url';
 import * as path from 'path';
-import { BrowserWindow } from 'electron';
+import {BrowserWindow} from 'electron';
 
-import { WindowState, WindowOpenParameters } from './windows.model';
+import {WindowState, WindowOpenParameters} from './windows.model';
 
 export class MainWindow {
 
@@ -11,64 +11,64 @@ export class MainWindow {
     public windowInstance: BrowserWindow;
 
 
-    constructor(openParameters: WindowOpenParameters) {
+    constructor (openParameters: WindowOpenParameters) {
 
-        this.createBrowserWindow(openParameters.state);
+        this.createBrowserWindow (openParameters.state);
 
         let urlWithPath: string;
 
-        if (openParameters.serve){
+        if (openParameters.serve) {
             require ('electron-reload') (__dirname, {
                 electron: require (path.join (__dirname, '../../../../node_modules/electron'))
             });
 
-            urlWithPath = path.join('http://localhost:4200', openParameters.url);            
+            urlWithPath = path.join ('http://localhost:4200', openParameters.url);
         } else {
             urlWithPath = url.format ({
                 pathname: path.join (__dirname, `/dist/index.html`, openParameters.url),
                 protocol: 'file:',
                 slashes: true,
                 // icon: path.join(__dirname, 'assets/icons/favicon.png')
-            })
+            });
         }
 
-        this.windowInstance.loadURL(urlWithPath);
+        this.windowInstance.loadURL (urlWithPath);
 
-        if (openParameters.devTools){
+        if (openParameters.devTools) {
             this.windowInstance.webContents.openDevTools ();
         }
     }
 
-    private createBrowserWindow(windowState: WindowState): void {
+    private createBrowserWindow (windowState: WindowState): void {
         this.windowInstance = new BrowserWindow ({width: windowState.width, height: windowState.height, show: windowState.show});
 
-        this.windowInstance.on('close', (e) => {
+        this.windowInstance.on ('close', (e) => {
             if (!this.isForseClose) {
-                e.preventDefault();
-                this.windowInstance.hide();      
-            }      
+                e.preventDefault ();
+                this.windowInstance.hide ();
+            }
         });
     }
 
-    public showOrFocus(){
+    public showOrFocus () {
         if (!this.windowInstance) {
-			return;
-		}
-
-		if (this.windowInstance.isMinimized()) {
-			this.windowInstance.restore();
+            return;
         }
 
-        //if (!this.windowInstance.isVisible){
-            this.windowInstance.show();
-        //}
+        if (this.windowInstance.isMinimized ()) {
+            this.windowInstance.restore ();
+        }
 
-		this.windowInstance.focus();
+        // if (!this.windowInstance.isVisible){
+        this.windowInstance.show ();
+        // }
+
+        this.windowInstance.focus ();
     }
 
-    public close(){
+    public close () {
         this.isForseClose = true;
-        this.windowInstance.close();
+        this.windowInstance.close ();
     }
 }
 
