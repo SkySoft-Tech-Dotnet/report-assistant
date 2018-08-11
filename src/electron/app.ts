@@ -1,18 +1,24 @@
-import {Windows} from './windows/windows';
-import {Tray} from 'electron';
-import {initMainWindow} from './windows/main-window';
-import {initTray} from './tray/tray';
+import { Tray } from 'electron';
 
-export class App {
-    static windows: Windows = new Windows();
-    static tray: Tray = null;
+import { WindowsService } from './windows/windows.service';
+import { TrayService } from './tray/tray.service';
+import { EnvironmentService } from './common/environment.service';
+import { LoggerService } from './common/logger.service';
 
-    static init (isServe: boolean, isDevtoolsOpen: boolean): void {
-        App.windows.main = initMainWindow(isServe, isDevtoolsOpen);
-        App.windows.main.on('closed', () => {
-            App.windows.main = null;
-        });
+export class RpApplication {
+    private windowsService: WindowsService;
+    private trayService: TrayService;
+    private environmentService: EnvironmentService;
+    private loggerService: LoggerService;
 
-        App.tray = initTray(App.windows, isServe, isDevtoolsOpen);
+    constructor(){
+        this.environmentService = new EnvironmentService();
+        this.loggerService = new LoggerService();
+        this.windowsService = new WindowsService(this.loggerService, this.environmentService);
+        this.trayService = new TrayService(this.windowsService);
+    }
+
+    public dispose(){
+
     }
 }

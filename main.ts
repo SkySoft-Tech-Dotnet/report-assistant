@@ -1,15 +1,15 @@
-import {app} from 'electron';
-import {App} from './src/electron/app';
+import { app } from 'electron';
+import { RpApplication } from './src/electron/app';
 
-// detect serve mode
-const args = process.argv.slice(1);
-const isServe: boolean = args.some(val => val === '--serve');
+
+
+let rpApplication: RpApplication = null;
 
 app.on('ready', () => {
-    App.init(isServe, true);
+    rpApplication = new RpApplication();    
 });
 
 // callback should be empty if we need to leave main process alive after all window close
 app.on('window-all-closed', () => {
-
+    rpApplication.dispose();
 });

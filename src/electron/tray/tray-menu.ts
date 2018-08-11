@@ -1,12 +1,14 @@
-import {app, Menu} from 'electron';
+import { app, Menu, Tray } from 'electron';
 
-export function trayMenu (tray, windows) {
+import { WindowsService } from '../windows/windows.service';
+
+export function buildTrayMenu (tray: Tray, windowsService: WindowsService) {
 
     const contextMenu = Menu.buildFromTemplate([
         {
             label: 'Open',
             click: () => {
-                windows.main.show();
+                windowsService.mainWindow.showOrFocus();
             }
         },
         {
@@ -15,19 +17,19 @@ export function trayMenu (tray, windows) {
         {
             label: 'Add report',
             click: () => {
-                windows.main.show();
+                windowsService.mainWindow.showOrFocus();
             }
         },
         {
             label: 'Add note',
             click: () => {
-                windows.main.show();
+                windowsService.mainWindow.showOrFocus();
             }
         },
         {
             label: 'Pause notification',
             click: () => {
-                windows.main.show();
+                windowsService.mainWindow.showOrFocus();
             }
         },
         {
@@ -36,6 +38,7 @@ export function trayMenu (tray, windows) {
         {
             label: 'Exit',
             click: function () {
+                windowsService.closeAll()
                 app.quit();
             }
         }
