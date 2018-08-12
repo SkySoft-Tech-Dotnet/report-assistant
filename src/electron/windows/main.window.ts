@@ -18,11 +18,14 @@ export class MainWindow {
         let urlWithPath: string;
 
         if (openParameters.serve) {
+            // require ('electron-reload') (__dirname, {
+            //     electron: require (path.join (__dirname, '../../../../node_modules/electron'))
+            // });
             require ('electron-reload') (__dirname, {
-                electron: require (path.join (__dirname, '../../../../node_modules/electron'))
+                electron: require ('electron-prebuilt')
             });
 
-            urlWithPath = path.join ('http://localhost:4200', openParameters.url);
+            urlWithPath = 'http://localhost:4200';
         } else {
             urlWithPath = url.format ({
                 pathname: path.join (__dirname, `/dist/index.html`, openParameters.url),

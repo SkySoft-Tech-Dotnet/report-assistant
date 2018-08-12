@@ -23,7 +23,7 @@ export function buildTrayMenu (tray: Tray, windowsService: WindowsService) {
         {
             label: 'Add note',
             click: () => {
-                windowsService.mainWindow.showOrFocus ();
+                windowsService.noteWindow.showOrFocus ();
             }
         },
         {
