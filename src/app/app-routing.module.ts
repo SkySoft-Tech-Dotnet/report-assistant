@@ -11,7 +11,7 @@ const routes: Routes = [
             './pages/add-note/add-note.module#AddNoteModule'
     },
 
-    // App routes goes here here
+    // App routes goes here
     {
         path: '',
         component: AppLayoutComponent,
