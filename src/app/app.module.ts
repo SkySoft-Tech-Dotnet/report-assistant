@@ -1,26 +1,30 @@
-import { CoreModule } from './modules/core.module';
-import { SharedModule } from './modules/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CoreModule} from './modules/core.module';
+import {SharedModule} from './modules/shared.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { SideMenuItemComponent } from './components/side-menu/side-menu-item/side-menu-item.component';
+import {AppLayoutComponent} from './layouts/app.layout';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    SideMenuComponent,
-    SideMenuItemComponent
-  ],
-  imports: [
-    SharedModule,
-    CoreModule,
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {SideMenuComponent} from './components/side-menu/side-menu.component';
+import {SideMenuItemComponent} from './components/side-menu/side-menu-item/side-menu-item.component';
+
+@NgModule ({
+    declarations: [
+        AppComponent,
+        SideMenuComponent,
+        SideMenuItemComponent,
+        AppLayoutComponent
+    ],
+    imports: [
+        SharedModule,
+        CoreModule,
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
