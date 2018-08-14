@@ -1,5 +1,3 @@
-import {Tray} from 'electron';
-
 import {WindowsService} from './windows/windows.service';
 import {TrayService} from './tray/tray.service';
 import {EnvironmentService} from './common/environment.service';
@@ -11,14 +9,14 @@ export class RpApplication {
     private environmentService: EnvironmentService;
     private loggerService: LoggerService;
 
-    constructor () {
-        this.environmentService = new EnvironmentService ();
-        this.loggerService = new LoggerService ();
-        this.windowsService = new WindowsService (this.loggerService, this.environmentService);
-        this.trayService = new TrayService (this.windowsService);
+    constructor() {
+        this.environmentService = new EnvironmentService();
+        this.loggerService = new LoggerService();
+        this.windowsService = new WindowsService(this.loggerService, this.environmentService);
+        this.trayService = new TrayService(this.windowsService);
     }
 
-    public dispose () {
+    public dispose() {
 
     }
 }

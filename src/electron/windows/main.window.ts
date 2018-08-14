@@ -11,41 +11,41 @@ export class MainWindow {
     public windowInstance: BrowserWindow;
 
 
-    constructor (openParameters: WindowOpenParameters) {
+    constructor(openParameters: WindowOpenParameters) {
 
-        this.createBrowserWindow (openParameters.state);
+        this.createBrowserWindow(openParameters.state);
 
         let urlWithPath: string;
 
         if (openParameters.serve) {
-            require ('electron-reload') (__dirname, {
-                electron: require (path.join (__dirname, '../../../../node_modules/electron'))
+            require ('electron-reload')(__dirname, {
+                electron: require (path.join(__dirname, '../../../../node_modules/electron'))
             });
 
-            urlWithPath = path.join ('http://localhost:4200', openParameters.url);
+            urlWithPath = path.join('http://localhost:4200', openParameters.url);
         } else {
-            urlWithPath = url.format ({
-                pathname: path.join (__dirname, `/dist/index.html`, openParameters.url),
+            urlWithPath = url.format({
+                pathname: path.join(__dirname, `/dist/index.html`, openParameters.url),
                 protocol: 'file:',
                 slashes: true,
                 // icon: path.join(__dirname, 'assets/icons/favicon.png')
             });
         }
 
-        this.windowInstance.loadURL (urlWithPath);
+        this.windowInstance.loadURL(urlWithPath);
 
         if (openParameters.devTools) {
-            this.windowInstance.webContents.openDevTools ();
+            this.windowInstance.webContents.openDevTools();
         }
     }
 
-    private createBrowserWindow (windowState: WindowState): void {
-        this.windowInstance = new BrowserWindow ({width: windowState.width, height: windowState.height, show: windowState.show});
+    private createBrowserWindow(windowState: WindowState): void {
+        this.windowInstance = new BrowserWindow({width: windowState.width, height: windowState.height, show: windowState.show});
 
-        this.windowInstance.on ('close', (e) => {
+        this.windowInstance.on('close', (e) => {
             if (!this.isForseClose) {
-                e.preventDefault ();
-                this.windowInstance.hide ();
+                e.preventDefault();
+                this.windowInstance.hide();
             }
         });
     }
@@ -55,20 +55,20 @@ export class MainWindow {
             return;
         }
 
-        if (this.windowInstance.isMinimized ()) {
-            this.windowInstance.restore ();
+        if (this.windowInstance.isMinimized()) {
+            this.windowInstance.restore();
         }
 
         // if (!this.windowInstance.isVisible){
-        this.windowInstance.show ();
+        this.windowInstance.show();
         // }
 
-        this.windowInstance.focus ();
+        this.windowInstance.focus();
     }
 
-    public close () {
+    public close() {
         this.isForseClose = true;
-        this.windowInstance.close ();
+        this.windowInstance.close();
     }
 }
 

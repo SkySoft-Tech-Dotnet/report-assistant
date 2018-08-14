@@ -10,7 +10,7 @@
       true,
       "check-space"
     ],
-    "curly": true,
+    "promise-function-async": true,  
     "deprecation": {
       "severity": "warn"
     },
@@ -23,7 +23,8 @@
     "import-spacing": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      4
     ],
     "interface-over-type-literal": true,
     "label-position": true,
@@ -110,8 +111,6 @@
     "variable-name": false,
     "whitespace": [
       true,
-      "check-branch",
-      "check-decl",
       "check-operator",
       "check-separator",
       "check-type"
