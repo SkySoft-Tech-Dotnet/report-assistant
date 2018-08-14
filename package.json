@@ -14,7 +14,7 @@
     "electron:mac": "npm run build:prod && npx electron-builder build --mac",
     "start": "npm run postinstall:electron && npm-run-all -p ng:serve electron:serve",
     "ng:serve": "ng serve",
-    "ng:serve:web": "npm run postinstall:web && npm run electron:tsc  && ng serve -o",
+    "ng:serve:web": "npm run postinstall:web && ng serve -o",
     "postinstall": "npm run postinstall:electron && npx electron-builder install-app-deps",
     "postinstall:web": "node postinstall-web",
     "postinstall:electron": "node postinstall",
