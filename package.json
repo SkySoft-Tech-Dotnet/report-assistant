@@ -8,6 +8,7 @@
     "build:prod": "npm run build -- -c production",
     "electron:tsc": "tsc main.ts --module commonjs --moduleResolution node --target es2017 --sourceMap true --outDir ./dist",
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:tsc && electron ./ --serve",
+    "electron:debug": "npm run build:dev && npm run electron:tsc",
     "electron:local": "npm run build:prod && npm run electron:tsc &&  electron .",
     "electron:linux": "npm run build:prod && npm run electron:tsc && npx electron-builder build --linux",
     "electron:windows": "npm run build:prod && npm run electron:tsc && npx electron-builder build --windows",

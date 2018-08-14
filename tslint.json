@@ -108,7 +108,8 @@
       }
     ],
     "unified-signatures": true,
-    "variable-name": false,
+    //"variable-name": false,
+    "variable-name": [true, "ban-keywords", "check-format"],
     "whitespace": [
       true,
       "check-operator",
