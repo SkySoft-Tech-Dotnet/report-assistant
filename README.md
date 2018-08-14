@@ -9,10 +9,10 @@ Cross platform application that helps to track your working hours.
 
 |Command|Type|Description|
 |--|--|--|
-|`npm run build`| Helper | Build the app. |
+|`npm run build`| Helper | Build the Angular app. |
 |`npm run build:dev`| Helper | Build the Angular app. Your built files are in the /dist folder. |
 |`npm run build:prod`| Helper | Build the Angular app with Angular aot. Your built files are in the /dist folder. |
-|`npm run electron:tsc`| Helper | Compile the Electron .ts to js. Your are in the /dist folder. |
+|`npm run electron:tsc`| Helper | Compile the Electron .ts to js. Your files are in the /dist folder. |
 |`npm run electron:serve`| Helper | Get Angular app from localhost:4200, compile Electron and start it with hot-reload. |
 |`npm run electron:local`| Stage build | Builds Angular application, compile Electron and start it. |
 |`npm run electron:linux`| Prod build | Builds Angular application, compile Electron and creates an app consumable on linux system. |
