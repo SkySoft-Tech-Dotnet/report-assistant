@@ -29,7 +29,7 @@ export class RepositoryBase<TEntity> {
 
     public add(entity: TEntity, type: string) {
         this.connection
-            .then(async connection => {
+            .then(connection => {
 
                 const repository = connection.getRepository(type);
                 console.log(repository);

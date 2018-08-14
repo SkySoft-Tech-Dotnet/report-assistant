@@ -22,10 +22,12 @@ export class MainWindow {
                 electron: require (path.join(__dirname, '../../../../node_modules/electron'))
             });
 
-            urlWithPath = path.join('http://localhost:4200', openParameters.url);
+            urlWithPath = 'http://localhost:4200';
+            // urlWithPath = 'http://localhost:4200' + '/#/' + openParameters.url;
         } else {
             urlWithPath = url.format({
-                pathname: path.join(__dirname, `/dist/index.html`, openParameters.url),
+                pathname: path.join(__dirname, `../../../../dist/index.html`),
+                // pathname: path.join(__dirname, `../../../../dist/index.html`) + '/#/' + openParameters.url,
                 protocol: 'file:',
                 slashes: true,
                 // icon: path.join(__dirname, 'assets/icons/favicon.png')
