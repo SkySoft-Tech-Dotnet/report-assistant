@@ -19,7 +19,7 @@
     "postinstall": "npm run postinstall:electron && npx electron-builder install-app-deps",
     "postinstall:web": "node postinstall-web",
     "postinstall:electron": "node postinstall",
-    "test": "npm run build && mocha"
+    "test": "npm run electron:debug && mocha"
   },
   "private": true,
   "dependencies": {
@@ -62,6 +62,7 @@
     "karma": "^2.0.5",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.1",
+    "karma-electron": "^6.0.0",
     "karma-jasmine": "^1.1.2",
     "karma-jasmine-html-reporter": "^1.2.0",
     "mocha": "^5.2.0",
