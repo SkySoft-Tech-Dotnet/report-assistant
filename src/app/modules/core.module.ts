@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { DbService } from '../services/db.service';
-import { WindowService } from '../services/window.service';
+import { WindowService } from '../services/windows.service';
 
 @NgModule({
   providers: [

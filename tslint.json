@@ -4,13 +4,12 @@
   ],
   "rules": {
     "arrow-return-shorthand": true,
-    "callable-types": true,
     "class-name": true,
     "comment-format": [
       true,
       "check-space"
     ],
-    "promise-function-async": true,  
+    "promise-function-async": true,
     "deprecation": {
       "severity": "warn"
     },
@@ -21,11 +20,6 @@
       "rxjs/Rx"
     ],
     "import-spacing": true,
-    "indent": [
-      true,
-      "spaces",
-      4
-    ],
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [
@@ -109,7 +103,7 @@
     ],
     "unified-signatures": true,
     //"variable-name": false,
-    "variable-name": [true, "ban-keywords", "check-format"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [
       true,
       "check-operator",

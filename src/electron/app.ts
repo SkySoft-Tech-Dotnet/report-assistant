@@ -16,6 +16,10 @@ export class RpApplication {
         this.trayService = new TrayService(this.windowsService);
     }
 
+	public onBeforeQuit() {
+		this.windowsService.mainWindow.hideInsteadClose = false;
+	}
+
     public dispose() {
 
     }
