@@ -21,6 +21,8 @@ export interface EmitterOptions {
 	onFirstListenerDidAdd?: Function;
 	onListenerDidAdd?: Function;
 	onLastListenerRemove?: Function;
+	onErrorInHandler?: Function;
+	onHandled?: Function;
 }
 
 /**
@@ -53,6 +55,20 @@ export class Emitter<T> {
 	private static readonly noop = function () { };
 	constructor(private options?: EmitterOptions) {
 
+	}
+
+	public setOnHandled(onHandled: Function) {
+		if (!this.options)
+			this.options = { } as EmitterOptions;
+
+		this.options.onHandled = onHandled;
+	}
+
+	public setOnError(onError: Function) {
+		if (!this.options)
+			this.options = { } as EmitterOptions;
+
+		this.options.onErrorInHandler = onError;
 	}
 
 	/**
@@ -132,8 +148,16 @@ export class Emitter<T> {
 						listener[0].call(listener[1], event);
 					}
 				} catch (e) {
+					if (this.options && this.options.onErrorInHandler) {
+						this.options.onErrorInHandler(e);
+					}
+
 					// onUnexpectedError(e);
 				}
+			}
+
+			if (this.options && this.options.onHandled) {
+				this.options.onHandled();
 			}
 		}
 	}
