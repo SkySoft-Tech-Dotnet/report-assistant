@@ -1,16 +1,18 @@
+import { IpcEventArgs } from 'src/common/events-args';
 import { Event } from 'src/common/events';
 import { ipcMain, ipcRenderer } from 'electron';
+import { ipcSenderToMain, ipcSenderToRenderer} from 'src/electron/common/ipc';
 
-export class Protocol {
-	private currentTask: Promise<T>
+// export class Protocol {
+// 	private currentTask: Promise<T>
 
-	public call(): Promise<T> {
-		ipcRenderer.send('');
+// 	public call(): Promise<T> {
+// 		ipcRenderer.send('');
 
-		ipcMain.once
-	}
+// 		ipcMain.once
+// 	}
 
-}
+// }
 
 
 export class Channel {
@@ -18,11 +20,15 @@ export class Channel {
 
 	}
 
-	public call<T>(command: string, arg?: any): Promise<T> {
-		return new Promise();
+	public callServer<T>(command: string, arg?: any): Promise<T> {
+		return ipcSenderToMain.send(this.getChannelName(command), arg);
 	}
 
-	public listen<T>(event: string, arg?: any): Event<T> {
-		return null;
+	public listenClient<T>(eventName: string, onEvent: (data: T) => void): void {
+		ipcSenderToRenderer.onReceive(this.getChannelName(eventName))((e: IpcEventArgs<T>) => onEvent(e.data));
+	}
+
+	protected getChannelName(eventName: string): string {
+		return `${this.channelName}.${eventName}`;
 	}
 }
