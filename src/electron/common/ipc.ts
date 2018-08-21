@@ -1,6 +1,7 @@
 import { ipcMain, ipcRenderer, EventEmitter } from 'electron';
 import { generateUuid } from 'src/common/uuid';
 import { Emitter, Event, EmitterOptions } from 'src/common/events';
+import { IpcEventArgs, EventArgs } from 'src/common/events-args';
 
 export enum FlowDirection {
 	toRenderer,
@@ -26,7 +27,7 @@ export class Ipc {
 
 	}
 
-  	send<T>(route: string, ...dataArgs: any[]): Promise<T> {
+  	send<T>(route: string, args: any): Promise<T> {
     	return new Promise((resolve, reject) => {
     		const replyChannel = `${route}.${generateUuid()}`;
       		let timer: any;
@@ -49,7 +50,7 @@ export class Ipc {
 				}
 			});
 
-			ipcRenderer.send(route, replyChannel, ...dataArgs);
+			ipcRenderer.send(route, replyChannel, args);
 
 			if (this.timeout) {
 				timer = setTimeout(() => {
@@ -60,56 +61,24 @@ export class Ipc {
     	});
 	}
 
-	event<T>(route: string): Event<T> {
-		const emitter = new Emitter<T>();
+	onReceive<T>(route: string): Event<IpcEventArgs<T>> {
+		const emitter = new Emitter<IpcEventArgs<T>>();
 
-		ipcMain.on(route, (event: any, replyChannel: string, ...dataArgs: any[]) => {
+		ipcMain.on(route, (event: any, replyChannel: string, args: T) => {
 
-			emitter.setOnError((e: Error) => event.sender.send(replyChannel, EventState.error, e));
-			emitter.setOnHandled(() => event.sender.send(replyChannel, EventState.success, results));
+			const eventArgs = new IpcEventArgs<T>(args);
 
+			emitter.updateOptions((options: EmitterOptions<IpcEventArgs<T>>) => {
+				options.onErrorInHandler = (e: Error) => event.sender.send(replyChannel, EventState.error, e);
+				options.onHandled = (processedArgs: IpcEventArgs<T>) => event.sender.send(replyChannel, EventState.success, processedArgs.response);
+			});
 
-			emitter.fire(dataArgs)
-
-			Promise.resolve().then(() => listener(...dataArgs))
-			  .then((results) => {
-				event.sender.send(replyChannel, 'success', results);
-			  })
-			  .catch((e) => {
-				const message = e && e.message ? e.message : e;
-				event.sender.send(replyChannel, 'failure', message);
-			  });
+			emitter.fire(eventArgs);
 		});
 
 		return emitter.event;
 	}
-
-
-
-
-  // If I ever implement `off`, then this method will actually use `this`.
-  // eslint-disable-next-line class-methods-use-this
-  on(route: string, listener) {
-    ipcMain.on(route, (event, replyChannel, ...dataArgs) => {
-      // Chaining off of Promise.resolve() means that listener can return a promise, or return
-      // synchronously -- it can even throw. The end result will still be handled promise-like.
-      Promise.resolve().then(() => listener(...dataArgs))
-        .then((results) => {
-          event.sender.send(replyChannel, 'success', results);
-        })
-        .catch((e) => {
-          const message = e && e.message ? e.message : e;
-          event.sender.send(replyChannel, 'failure', message);
-        });
-    });
-  }
 }
 
-export const PromiseIpc = PromiseIpcMain;
-
-const mainExport = new PromiseIpcMain();
-mainExport.PromiseIpc = PromiseIpcMain;
-mainExport.PromiseIpcMain = PromiseIpcMain;
-
-export default mainExport;
-module.exports = mainExport;
+export const ipcSenderToMain: Ipc = new Ipc(FlowDirection.toMain, 0);
+export const ipcSenderToRenderer: Ipc = new Ipc(FlowDirection.toRenderer, 0);

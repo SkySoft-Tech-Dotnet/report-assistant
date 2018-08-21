@@ -1,12 +1,13 @@
 import { IDisposable } from 'src/common/lifecycle';
 import { LinkedList } from 'src/common/linkedList';
+import { EventArgs } from 'src/common/events-args';
 
 /**
  * To an event a function with one or zero parameters
  * can be subscribed. The event is the subscriber function itself.
  */
-export interface Event<T> {
-	(listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[]): IDisposable;
+export interface Event<T extends EventArgs> {
+	(listener: (e: T) => void, thisArgs?: T, disposables?: IDisposable[]): IDisposable;
 }
 
 export namespace Event {
@@ -16,13 +17,13 @@ export namespace Event {
 
 type Listener = [Function, any] | Function;
 
-export interface EmitterOptions {
+export interface EmitterOptions<T> {
 	onFirstListenerAdd?: Function;
 	onFirstListenerDidAdd?: Function;
 	onListenerDidAdd?: Function;
 	onLastListenerRemove?: Function;
-	onErrorInHandler?: Function;
-	onHandled?: Function;
+	onErrorInHandler?: (e: Error) => void;
+	onHandled?: (e: T) => void;
 }
 
 /**
@@ -46,29 +47,20 @@ export interface EmitterOptions {
 		}
 	}
  */
-export class Emitter<T> {
+export class Emitter<T extends EventArgs> {
 	private _event: Event<T>;
 	private disposed: boolean;
 	private deliveryQueue: [Listener, T][];
 	protected listeners: LinkedList<Listener>;
 
 	private static readonly noop = function () { };
-	constructor(private options?: EmitterOptions) {
-
+	constructor(private options?: EmitterOptions<T>) {
+		if (!this.options)
+			this.options = { } as EmitterOptions<T>;
 	}
 
-	public setOnHandled(onHandled: Function) {
-		if (!this.options)
-			this.options = { } as EmitterOptions;
-
-		this.options.onHandled = onHandled;
-	}
-
-	public setOnError(onError: Function) {
-		if (!this.options)
-			this.options = { } as EmitterOptions;
-
-		this.options.onErrorInHandler = onError;
+	public updateOptions(changeFunc: (options: EmitterOptions<T>) => void) {
+		changeFunc(this.options);
 	}
 
 	/**
@@ -77,7 +69,7 @@ export class Emitter<T> {
 	 */
 	get event(): Event<T> {
 		if (!this._event) {
-			this._event = (listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[]) => {
+			this._event = (listener: (e: T) => void, thisArgs?: T, disposables?: IDisposable[]) => {
 				if (!this.listeners) {
 					this.listeners = new LinkedList();
 				}
@@ -124,7 +116,7 @@ export class Emitter<T> {
 	 * To be kept private to fire an event to
 	 * subscribers
 	 */
-	fire(event?: T): any {
+	fire(event?: T): void {
 		if (this.listeners) {
 			// put all [listener,event]-pairs into delivery queue
 			// then emit all event. an inner/nested event might be
@@ -157,7 +149,7 @@ export class Emitter<T> {
 			}
 
 			if (this.options && this.options.onHandled) {
-				this.options.onHandled();
+				this.options.onHandled(event);
 			}
 		}
 	}

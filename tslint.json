@@ -102,7 +102,6 @@
       }
     ],
     "unified-signatures": true,
-    //"variable-name": false,
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [
       true,
