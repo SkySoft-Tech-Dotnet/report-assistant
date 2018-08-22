@@ -2,23 +2,21 @@ import { Injectable } from '@angular/core';
 import { IWindowsService } from 'src/electron/windows/windows.service';
 import { WindowOpenParameters } from 'src/electron/windows/windows.model';
 import { IWindow } from 'src/electron/windows/base.window';
-import { WindowsChannel } from 'src/electron/windows/windows.channel';
+import { ChannelToServer } from 'src/electron/common/base.channel';
 
 @Injectable()
-export class WindowsService implements IWindowsService {
-	private channel: WindowsChannel;
-
+export class WindowsService extends ChannelToServer implements IWindowsService {
 	mainWindow: IWindow;
 
 	constructor() {
-		this.channel = new WindowsChannel();
+		super('windows-service');
 	}
 
 	closeAll(): void {
-		this.channel.closeAll();
+		this.callServer('closeAll');
 	}
 
 	openNewWindow(openParameters: WindowOpenParameters): void {
-		this.channel.openNewWindow(openParameters);
+		this.callServer('openNewWindow', openParameters);
 	}
 }

@@ -3,7 +3,7 @@ import {MainWindow} from './main.window';
 
 import {EnvironmentService} from '../common/environment.service';
 import {LoggerService} from '../common/logger.service';
-import { BaseWindow, IWindow } from 'src/electron/windows/base.window';
+import { BaseWindow, IWindow } from './base.window';
 
 export interface IWindowsService {
     mainWindow: IWindow;

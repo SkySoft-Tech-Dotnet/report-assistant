@@ -1,6 +1,6 @@
-import { IDisposable } from 'src/common/lifecycle';
-import { LinkedList } from 'src/common/linkedList';
-import { EventArgs } from 'src/common/events-args';
+import { IDisposable } from './lifecycle';
+import { LinkedList } from './linkedList';
+import { EventArgs } from './events-args';
 
 /**
  * To an event a function with one or zero parameters

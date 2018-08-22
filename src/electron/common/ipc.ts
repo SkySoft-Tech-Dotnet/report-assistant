@@ -1,7 +1,7 @@
-import { ipcMain, ipcRenderer, EventEmitter } from 'electron';
-import { generateUuid } from 'src/common/uuid';
-import { Emitter, Event, EmitterOptions } from 'src/common/events';
-import { IpcEventArgs, EventArgs } from 'src/common/events-args';
+import { ipcRenderer, WebContents, IpcRenderer, IpcMain, ipcMain } from 'electron';
+import { generateUuid } from '../../common/uuid';
+import { Emitter, Event, EmitterOptions } from '../../common/events';
+import { IpcEventArgs } from '../../common/events-args';
 
 export enum FlowDirection {
 	toRenderer,
@@ -13,27 +13,18 @@ enum EventState {
 	success
 }
 
-export class Ipc {
-
-	protected get eventSource(): EventEmitter {
-		return this.flowDirection === FlowDirection.toMain ? ipcRenderer : ipcMain;
-	}
-
-	protected get eventTarget(): EventEmitter {
-		return this.flowDirection === FlowDirection.toMain ? ipcMain : ipcRenderer;
-	}
-
-	constructor(private flowDirection: FlowDirection, private timeout?: number) {
+export abstract class Ipc {
+	constructor(private timeout?: number) {
 
 	}
 
-  	send<T>(route: string, args: any): Promise<T> {
+  	protected sendInternal<T>(route: string, args: any, receiver: IpcRenderer | IpcMain, sender: IpcRenderer | WebContents): Promise<T> {
     	return new Promise((resolve, reject) => {
-    		const replyChannel = `${route}.${generateUuid()}`;
+    		const replyChannel = route + '.' + generateUuid();
       		let timer: any;
       		let didTimeOut = false;
 
-			ipcMain.once(replyChannel, (event: any, status: EventState, returnData: T | Error) => {
+			receiver.once(replyChannel, (event: any, status: EventState, returnData: T | Error) => {
 				clearTimeout(timer);
 				if (didTimeOut) {
 					return null;
@@ -50,7 +41,7 @@ export class Ipc {
 				}
 			});
 
-			ipcRenderer.send(route, replyChannel, args);
+			sender.send(route, replyChannel, args);
 
 			if (this.timeout) {
 				timer = setTimeout(() => {
@@ -61,10 +52,10 @@ export class Ipc {
     	});
 	}
 
-	onReceive<T>(route: string): Event<IpcEventArgs<T>> {
+	protected onReceiveInternal<T>(route: string, receiver: IpcRenderer | IpcMain): Event<IpcEventArgs<T>> {
 		const emitter = new Emitter<IpcEventArgs<T>>();
 
-		ipcMain.on(route, (event: any, replyChannel: string, args: T) => {
+		receiver.on(route, (event: any, replyChannel: string, args: T) => {
 
 			const eventArgs = new IpcEventArgs<T>(args);
 
@@ -80,5 +71,30 @@ export class Ipc {
 	}
 }
 
-export const ipcSenderToMain: Ipc = new Ipc(FlowDirection.toMain, 0);
-export const ipcSenderToRenderer: Ipc = new Ipc(FlowDirection.toRenderer, 0);
+export class IpcClient extends Ipc {
+	constructor(timeout?: number) {
+		super(timeout);
+	}
+
+  	public send<T>(route: string, args: any): Promise<T> {
+		return this.sendInternal(route, args, ipcRenderer, ipcRenderer);
+	}
+
+	public onReceive<T>(route: string): Event<IpcEventArgs<T>> {
+		return this.onReceiveInternal(route, ipcRenderer);
+	}
+}
+
+export class IpcServer extends Ipc {
+	constructor(timeout?: number) {
+		super(timeout);
+	}
+
+  	public send<T>(route: string, webContent: WebContents, args: any): Promise<T> {
+		return this.sendInternal(route, args, ipcMain, webContent);
+	}
+
+	public onReceive<T>(route: string): Event<IpcEventArgs<T>> {
+		return this.onReceiveInternal(route, ipcMain);
+	}
+}

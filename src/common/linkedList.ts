@@ -1,4 +1,4 @@
-import { Iterator } from 'src/common/iterator';
+import { Iterator } from './iterator';
 
 class Node<E> {
 	element: E;
