@@ -21,4 +21,3 @@ export enum WindowMode {
     Minimized,
     Fullscreen
 }
-

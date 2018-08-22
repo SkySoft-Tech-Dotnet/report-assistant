@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowsService } from 'src/app/services/windows.service';
+import { WindowsServiceClient } from '../../services/windows.service';
 import { WindowOpenParameters } from 'src/electron/windows/windows.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { WindowOpenParameters } from 'src/electron/windows/windows.model';
 })
 export class DashboardComponent implements OnInit {
 
-	constructor(private windowsService: WindowsService) { }
+	constructor(private windowsService: WindowsServiceClient) { }
 
 	ngOnInit() {
 

@@ -1,11 +1,11 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { DbService } from '../services/db.service';
-import { WindowsService } from '../services/windows.service';
+import { WindowsServiceClient } from '../services/windows.service';
 
 @NgModule({
   providers: [
     DbService,
-    WindowsService
+    WindowsServiceClient
   ]
 })
 export class CoreModule {

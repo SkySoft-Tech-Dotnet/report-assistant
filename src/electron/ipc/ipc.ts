@@ -1,7 +1,9 @@
-import { ipcRenderer, WebContents, IpcRenderer, IpcMain, ipcMain } from 'electron';
+import { ipcRenderer, WebContents, IpcRenderer, IpcMain, ipcMain, BrowserWindow } from 'electron';
 import { generateUuid } from '../../common/uuid';
 import { Emitter, Event, EmitterOptions } from '../../common/events';
 import { IpcEventArgs } from '../../common/events-args';
+import { IChannel } from './base.channel';
+import { environment } from '../../environments/environment';
 
 export enum FlowDirection {
 	toRenderer,
@@ -69,6 +71,10 @@ export abstract class Ipc {
 
 		return emitter.event;
 	}
+
+	protected buildChannelName(...parts: string[]): string {
+		return parts.join('.');
+	}
 }
 
 export class IpcClient extends Ipc {
@@ -76,12 +82,11 @@ export class IpcClient extends Ipc {
 		super(timeout);
 	}
 
-  	public send<T>(route: string, args: any): Promise<T> {
-		return this.sendInternal(route, args, ipcRenderer, ipcRenderer);
-	}
+	public getChannel(channelName: string): IChannel {
+		const call = (command: string, arg: any) => this.sendInternal(this.buildChannelName(channelName, command), arg, ipcRenderer, ipcRenderer);
+		const listen = (event: string, arg: any) => this.onReceiveInternal(this.buildChannelName(channelName, event), ipcRenderer);
 
-	public onReceive<T>(route: string): Event<IpcEventArgs<T>> {
-		return this.onReceiveInternal(route, ipcRenderer);
+		return { call, listen } as IChannel;
 	}
 }
 
@@ -90,11 +95,14 @@ export class IpcServer extends Ipc {
 		super(timeout);
 	}
 
-  	public send<T>(route: string, webContent: WebContents, args: any): Promise<T> {
-		return this.sendInternal(route, args, ipcMain, webContent);
-	}
+	public getChannel(channelName: string, ): IChannel {
+		const call = (command: string, arg: any, windowInstance: BrowserWindow) =>
+			this.sendInternal(this.buildChannelName(channelName, command), arg, ipcMain, windowInstance.webContents);
+		const listen = (event: string, arg: any) => this.onReceiveInternal(this.buildChannelName(channelName, event), ipcMain);
 
-	public onReceive<T>(route: string): Event<IpcEventArgs<T>> {
-		return this.onReceiveInternal(route, ipcMain);
+		return { call, listen } as IChannel;
 	}
 }
+
+export const ipcServer = new IpcServer(environment.ipcTimeout);
+export const ipcClient = new IpcClient(environment.ipcTimeout);
