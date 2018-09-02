@@ -1,10 +1,10 @@
-import { Channels } from './../ipc/channels.enum';
+import { Channels } from '../ipc/channels.enum';
 import { WindowsService } from './windows.service';
 import { WindowOpenParameters } from './windows.model';
 import { IChannel } from '../ipc/base.channel';
 import { ipcServer } from '../ipc/ipc';
 
-export class WindowsChannel {
+export class WindowsServiceServer {
 	private channel: IChannel;
 
 	constructor(protected service?: WindowsService) {

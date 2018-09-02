@@ -1,4 +1,4 @@
-import {WindowsChannel} from './windows/windows.channel';
+import {WindowsServiceServer} from './windows/windows-server.service';
 import {WindowsService} from './windows/windows.service';
 import {TrayService} from './tray/tray.service';
 import {EnvironmentService} from './common/environment.service';
@@ -9,14 +9,14 @@ export class RpApplication {
     private trayService: TrayService;
     private environmentService: EnvironmentService;
 	private loggerService: LoggerService;
-	private windowsChannel: WindowsChannel;
+	private windowsServiceServer: WindowsServiceServer;
 
     constructor() {
         this.environmentService = new EnvironmentService();
         this.loggerService = new LoggerService();
         this.windowsService = new WindowsService(this.loggerService, this.environmentService);
 		this.trayService = new TrayService(this.windowsService);
-		this.windowsChannel = new WindowsChannel(this.windowsService);
+		this.windowsServiceServer = new WindowsServiceServer(this.windowsService);
     }
 
 	public onBeforeQuit() {
